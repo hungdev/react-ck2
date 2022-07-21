@@ -21,7 +21,7 @@
 
 .img-hero {
   animation: introLoad 2s forwards;
-  background: url("./assets/images/hero-shoe.jpg");
+  background: url("../assets/images/hero-shoe.jpg");
   background-position: 25%;
   background-size: cover;
   height: 33rem;
@@ -71,7 +71,7 @@
   width: 100%;
   height: 25rem;
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),
-    url("./assets/images/featured.jpg");
+    url("../assets/images/featured.jpg");
   background-size: cover;
   margin: 2.5rem 0;
 }
@@ -94,7 +94,7 @@
   font-weight: 600;
   color: white;
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),
-    url("./assets/images/products-image.jpg");
+    url("../assets/images/products-image.jpg");
   background-size: cover;
 
   @media screen and (min-width: 920px) {
@@ -163,7 +163,7 @@
   }
 
   .left {
-    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .9)), url("./assets/images/shoe-head.jpg");
+    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .9)), url("../assets/images/shoe-head.jpg");
     background-size: cover;
     width: 50%;
     background-position: 25%;

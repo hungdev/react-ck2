@@ -1,16 +1,6 @@
 import React from 'react';
-import {
-  FaSearch,
-  FaUser,
-  FaHeart,
-  FaShoppingCart,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
-import Eye from './assets/Eye';
-import EyeClose from './assets/EyeClose';
-import './App.scss';
+import Eye from '../assets/Eye';
+import EyeClose from '../assets/EyeClose';
 import Header from '../components/Header';
 
 export default function Login() {

@@ -1,15 +1,4 @@
-import './App.scss';
-import logo from './logo.svg';
-import {
-  FaSearch,
-  FaUser,
-  FaHeart,
-  FaShoppingCart,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
-import { products } from './fakeData';
+import React from 'react';
 import Header from '../components/Header';
 
 const sizeList = [40, 41, 42, 43];
@@ -27,7 +16,7 @@ function App() {
         <div className='flex flex-row'>
           <div className='flex-1 mr-8'>
             <div className='flex flex-row hover:border p-2 mb-6'>
-              <img src={`${require("./assets/images/shoe1.jfif")}`} alt={'shoes'} className='object-cover w-40 h-40' />
+              <img src={`${require("../assets/images/shoe1.jfif")}`} alt={'shoes'} className='object-cover w-40 h-40' />
               <div className='ml-4 w-full'>
                 <div className='flex justify-between'>
                   <div className='font-bold'>Nike Air Force 1 '07 LV8'</div>

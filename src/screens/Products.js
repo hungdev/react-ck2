@@ -1,16 +1,5 @@
-import './App.scss';
-import logo from './logo.svg';
-import {
-  FaSearch,
-  FaUser,
-  FaHeart,
-  FaShoppingCart,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
 import { products } from './fakeData';
-import Heart from './assets/Heart';
+import Heart from '../assets/Heart';
 import Header from '../components/Header';
 
 function App() {

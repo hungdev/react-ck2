@@ -1,8 +1,19 @@
-import './App.scss';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useNavigate
+} from "react-router-dom";
 import Header from '../components/Header';
 import { categories } from './fakeData';
 
 function App() {
+  const navigate = useNavigate();
+
+  const onMoveProduct = () => {
+    navigate('/product');
+  };
   return (
     <div>
       {/* header */}
@@ -27,7 +38,7 @@ function App() {
             <img src={e.img} alt={e.title} className='h-full w-full object-cover' />
             <div className='flex flex-col absolute top-1/2 left-1/2 transform-center'>
               <div className=' text-center text-white text-3xl font-bold'>{e.title}</div>
-              <button className='bg-white p-2 round'>Shop Now</button>
+              <button onClick={onMoveProduct} className='bg-white p-2 round'>Shop Now</button>
             </div>
           </div>
         ))}

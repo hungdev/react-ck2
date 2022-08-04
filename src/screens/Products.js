@@ -1,8 +1,28 @@
-import { products } from './fakeData';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+// import { products } from './fakeData';
 import Heart from '../assets/Heart';
 import Header from '../components/Header';
+import { getImageUrl } from '../utils';
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get('http://shoes.hungvu.net/get-products');
+        console.log(response?.data?.data);
+        setProducts(response?.data?.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+
   return (
     <div>
       {/* header */}
@@ -151,17 +171,17 @@ function App() {
           {/* item */}
           <div className='flex flex-wrap overflow-auto mt-4 -mr-10' style={{ height: 'calc(100vh - 16rem)' }}>
             {products.map(e => (
-              <div className='mr-12 mb-12' style={{ width: 'calc(25% - 48px)' }}>
+              <div key={e._id} className='mr-12 mb-12' style={{ width: 'calc(25% - 48px)' }}>
                 <div className="relative">
-                  <img src={e.img} alt={e.title} className='object-cover h-48 w-full' />
+                  <img src={getImageUrl(e.images?.[0])} alt={e.title} className='object-cover h-48 w-full' />
                   <div className="wrap-heart">
                     <Heart />
                   </div>
                 </div>
                 <div className='p-1'>
-                  <div className='font-bold'>{e.title}</div>
-                  <div>{e.details}</div>
-                  <div>{e.rating}⭐</div>
+                  <div className='font-bold'>{e.name}</div>
+                  {/* <div>{e.accessories}</div> */}
+                  <div>{e.star}⭐</div>
                   <div>{e.price}$</div>
                 </div>
                 <div className='bg-gray-800 h-11 flex justify-center items-center uppercase font-medium text-white cursor-pointer'>

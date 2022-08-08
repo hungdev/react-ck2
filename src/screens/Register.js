@@ -14,16 +14,8 @@ export default function Login() {
         <div className='flex w-1/2 justify-center items-center right '>
           <div className='w-4/5 p-10 border'>
             <div className='text-center text-3xl font-bold'>Sign Up</div>
-            <div className='flex flex-row justify-between mt-4'>
-              <div>
-                <div>First Name</div>
-                <input placeholder='type here' className='border-black border rounded pl-2 w-full h-10' />
-              </div>
-              <div>
-                <div>Last Name</div>
-                <input placeholder='type here' className='border-black border rounded pl-2 w-full h-10' />
-              </div>
-            </div>
+            <div className='mt-2'>User Name</div>
+            <input placeholder='type here' className='border-black border rounded pl-2 w-full h-10' />
             <div className='mt-2'>Email</div>
             <input placeholder='type here' className='border-black border rounded pl-2 w-full h-10' />
             <div className='mt-2'>Password</div>

@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 import Eye from '../assets/Eye';
 import EyeClose from '../assets/EyeClose';
 import Header from '../components/Header';
@@ -35,7 +41,7 @@ export default function Login() {
               Login as guest
             </div>
             <div className='flex justify-center items-center mt-2 flex-col'>
-              <div className='flex'>Not a Member? <div to={'/register'} className='ml-2 text-blue-700 cursor-pointer'>Sign Up</div></div>
+              <div className='flex'>Not a Member? <Link to={'/register'} className='ml-2 text-blue-700 cursor-pointer'>Sign Up</Link></div>
               <div className='mt-2 px-8 text-center'>By continuing, you agree to accept our Privacy Policy & Terms of Service.</div>
             </div>
           </div>

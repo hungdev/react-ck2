@@ -41,7 +41,9 @@ export default function Header() {
           <FaUser className='text-2xl mr-10 text-gray-300' />
           <FaHeart className='text-2xl mr-10 text-gray-300' />
           <FaShoppingCart className='text-2xl mr-10 text-gray-300' />
-          <FiLogOut className='text-2xl mr-10 text-gray-300' />
+          <Link to="/login">
+            <FiLogOut className='text-2xl mr-10 text-gray-300' />
+          </Link>
         </div>
       </div>
     </div>

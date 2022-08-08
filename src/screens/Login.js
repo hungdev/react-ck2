@@ -5,11 +5,25 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import axios from 'axios';
 import Eye from '../assets/Eye';
 import EyeClose from '../assets/EyeClose';
 import Header from '../components/Header';
 
 export default function Login() {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const onLoginHandle = async () => {
+    const data = {
+      email, password
+    };
+    try {
+      const response = await axios.post(`http://shoes.hungvu.net/login`, data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className='mt-16 px-16 auth-screen'>
       {/* header */}
@@ -23,6 +37,8 @@ export default function Login() {
             <div className='text-center text-3xl font-bold'>Login</div>
             <div className='mt-4'>Email</div>
             <input
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               placeholder='type here' className='border-black border rounded pl-2 w-full h-10' />
             <div className='mt-2'>Password</div>
             <div className='relative'>
@@ -30,10 +46,13 @@ export default function Login() {
                 placeholder='Must be at least 8 characters'
                 className='border-black border rounded pl-2 w-full h-10'
                 type={'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div className='eye-input'>  <EyeClose /> </div>
             </div>
             <div
+              onClick={onLoginHandle}
               className='rounded w-full bg-gray-800 h-14 flex justify-center items-center uppercase font-medium text-white cursor-pointer mt-4'>
               Login
             </div>

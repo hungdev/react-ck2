@@ -11,19 +11,26 @@ import axios from 'axios';
 import { useLocation, useParams } from "react-router-dom";
 import { products } from './fakeData';
 import Header from '../components/Header';
+import { getImageUrl } from '../utils';
 
 const sizeList = [40, 41, 42, 43];
 
 function App() {
   const params = useParams();
   const [products, setProducts] = useState([]);
+  const [commentList, setCommentList] = useState([]);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [content, setContent] = useState('');
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await axios.get(`http://shoes.hungvu.net/product/${params.id}`);
-        console.log(response);
-        setProducts(response?.data?.data);
+        const productDetail = await axios.get(`http://shoes.hungvu.net/product/${params.id}`);
+        const commentsResult = await axios.get(`http://shoes.hungvu.net/get-product-comments/${params.id}`);
+        setProducts(productDetail?.data?.data);
+        console.log('commentsResult', commentsResult);
+        setCommentList(commentsResult?.data?.data);
       } catch (error) {
         console.error(error);
       }
@@ -31,6 +38,17 @@ function App() {
 
     getProducts();
   }, []);
+
+  const onAddComment = async () => {
+    const data = {
+      email, name: name, content: content, productId: params.id
+    };
+    try {
+      const response = await axios.post(`http://shoes.hungvu.net/create-comment`, data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -41,7 +59,7 @@ function App() {
       <div>
         <div className='flex flex-row mt-14 mb-8'>
           <div className='w-1/2'>
-            <img src={`${require("../assets/images/shoe1.jfif")}`} alt={'shoes'} className='object-cover w-full' style={{ height: 500 }} />
+            <img src={getImageUrl(products?.images?.[0])} alt={'shoes'} className='object-cover w-full' style={{ height: 500 }} />
           </div>
           <div className='w-1/2 px-8'>
             <div className='bg-gray-800 inline-block p-2 px-6 text-white font-bold'>MEN</div>
@@ -92,22 +110,24 @@ function App() {
             <div className='font-bold text-xl'>841 reviews</div>
             <div className='underline'>Write a review</div>
           </div>
+          <div className='mt-4 flex flex-col'>
+            <div className='mt-4'>Name</div>
+            <input className='border mt-2' placeholder='name' value={name} onChange={ev => setName(ev.target.value)} />
+            <div className='mt-4'>Email</div>
+            <input className='border mt-2' placeholder='email' value={email} onChange={ev => setEmail(ev.target.value)} />
+            <div className='mt-4'>Content</div>
+            <textarea className='border mt-2' placeholder='content' value={content} onChange={ev => setContent(ev.target.value)} />
+            <div onClick={onAddComment} className='w-1/2 bg-gray-800 h-11 flex justify-center items-center uppercase font-medium text-white cursor-pointer'>
+              Add comment
+            </div>
+          </div>
 
-          <div className='w-3/4 mb-4'>
-            <div className='font-bold'>Michel jackson</div>
-            <div className='text-xs'>2022-01-03 20:40:10</div>
-            <div>Soft, comfortable, lightweight, made out of recyclable materials, great look. I like the fact they are dark grey</div>
-          </div>
-          <div className='w-3/4 mb-4'>
-            <div className='font-bold'>Michel jackson</div>
-            <div className='text-xs'>2022-01-03 20:40:10</div>
-            <div>Soft, comfortable, lightweight, made out of recyclable materials, great look. I like the fact they are dark grey</div>
-          </div>
-          <div className='w-3/4 mb-4'>
-            <div className='font-bold'>Michel jackson</div>
-            <div className='text-xs'>2022-01-03 20:40:10</div>
-            <div>Soft, comfortable, lightweight, made out of recyclable materials, great look. I like the fact they are dark grey</div>
-          </div>
+          {commentList?.map(e => (
+            <div className='w-3/4 mb-4'>
+              <div className='font-bold'>Michel jackson</div>
+              <div className='text-xs'>2022-01-03 20:40:10</div>
+              <div>Soft, comfortable, lightweight, made out of recyclable materials, great look. I like the fact they are dark grey</div>
+            </div>))}
 
         </div>
 

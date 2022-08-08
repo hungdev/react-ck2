@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 // import { products } from './fakeData';
 import Heart from '../assets/Heart';
@@ -6,13 +7,14 @@ import Header from '../components/Header';
 import { getImageUrl } from '../utils';
 
 function App() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const response = await axios.get('http://shoes.hungvu.net/get-products');
-        console.log(response?.data?.data);
+        console.log(response);
         setProducts(response?.data?.data);
       } catch (error) {
         console.error(error);
@@ -179,7 +181,7 @@ function App() {
                   </div>
                 </div>
                 <div className='p-1'>
-                  <div className='font-bold'>{e.name}</div>
+                  <div onClick={() => navigate(`/detail/${e?._id}`)} className='font-bold'>{e.name}</div>
                   {/* <div>{e.accessories}</div> */}
                   <div>{e.star}⭐</div>
                   <div>{e.price}$</div>

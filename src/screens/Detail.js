@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FaSearch,
   FaUser,
@@ -7,12 +7,31 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import axios from 'axios';
+import { useLocation, useParams } from "react-router-dom";
 import { products } from './fakeData';
 import Header from '../components/Header';
 
 const sizeList = [40, 41, 42, 43];
 
 function App() {
+  const params = useParams();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(`http://shoes.hungvu.net/product/${params.id}`);
+        console.log(response);
+        setProducts(response?.data?.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getProducts();
+  }, []);
+
   return (
     <div>
       {/* header */}
@@ -26,15 +45,12 @@ function App() {
           </div>
           <div className='w-1/2 px-8'>
             <div className='bg-gray-800 inline-block p-2 px-6 text-white font-bold'>MEN</div>
-            <div className='text-4xl font-bold my-1'>NIKE</div>
-            <div>Nike Air Force 1 '07 LV8'</div>
+            <div className='text-4xl font-bold my-1'>{products?.name}</div>
+            <div>{products?.accessories}</div>
             <div className='my-2'>Rating: 4⭐</div>
             <div>Price: 5000$</div>
             <div className='my-2 border-dashed border-y-2 border-gray-500 py-4'>
-              Sử dụng vải canvas NE phối hợp cùng da lộn, Vintas Mister phiên bản mới gia tăng thêm độ thoải mái khi lên chân,
-              đồng thời vẫn nguyên vẹn diện mạo cổ điển đầy cuốn hút. Lựa chọn không thể bỏ qua đối với mọi tín đồ theo đuổi
-              nét đẹp mang dấu ấn thời gian.ou know best:
-              era-echoing, '80s construction, bold details and nothin'-but-net style.
+              {products?.details}
             </div>
             <div className='flex flex-row items-center'>
               <div className='mr-2'>Available sizes:</div>
@@ -95,7 +111,7 @@ function App() {
 
         </div>
 
-        <div className='border-dashed border-t-2 border-gray-500 pt-4 text-center font-bold text-xl'>
+        {/* <div className='border-dashed border-t-2 border-gray-500 pt-4 text-center font-bold text-xl'>
           Products viewed
         </div>
         <div className='flex flex-row justify-around px-40 my-4'>
@@ -104,7 +120,7 @@ function App() {
               <img src={e.img} alt={'shoes'} className='object-cover w-72 h-72' />
             </div>
           ))}
-        </div>
+        </div> */}
 
       </div>
 
